@@ -44,6 +44,7 @@ THIRD_PARTY_APPS = (
 # Apps specific for this project go here.
 LOCAL_APPS = (
     'box_management.users',  # custom users app
+    'boxes',
     # Your stuff: custom apps go here
 )
 
