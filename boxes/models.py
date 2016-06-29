@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext as _
 
 from box_management.users.models import User
 
@@ -22,7 +23,7 @@ class ItemCategory(TimeStampedModel):
 
 
 class Item(TimeStampedModel):
-    STATUS = Choices('contained', ('taken', 'taken by user'))
+    STATUS = Choices(('contained', _('contained')), ('taken', _('taken by user')))
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
     box = models.ForeignKey(Box, on_delete=models.CASCADE)
@@ -31,7 +32,11 @@ class Item(TimeStampedModel):
     in_possession_of = models.ForeignKey(User, blank=True, null=True)
 
     def __str__(self):
-        return "{i.name}, currently {i.status}".format(i=self)
+        status = self.get_status_display()
+        ret_string = "{name}, currently {status}".format(name=self.name, status=status)
+        if self.status == self.STATUS.taken:
+            ret_string += " '{user}'".format(user=self.in_possession_of)
+        return ret_string
 
     def take_item(self, user):
         self.status = self.STATUS.taken
