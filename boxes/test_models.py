@@ -29,14 +29,14 @@ class ItemTests(TestCase):
         self.assertEqual('Ethernet cable, currently contained', str(self.cable))
         self.assertEqual('NGE Band 4, currently contained', str(self.manga))
 
-    def test_take_item(self):
-        self.manga.take_item(self.user)
+    def test_give_to(self):
+        self.manga.give_to(self.user)
         self.assertEqual(self.user, self.manga.in_possession_of)
         self.assertEqual('NGE Band 4, currently taken by user \'testuser\'', str(self.manga)) # name of the test user
 
-    def test_return_item(self):
-        self.manga.take_item(self.user)
+    def test_return_to_box(self):
+        self.manga.give_to(self.user)
         self.assertEqual(self.user, self.manga.in_possession_of)
-        self.manga.return_item()
+        self.manga.return_to_box()
         self.assertEqual(self.manga.in_possession_of, None)
 

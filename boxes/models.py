@@ -38,10 +38,10 @@ class Item(TimeStampedModel):
             ret_string += " '{user}'".format(user=self.in_possession_of)
         return ret_string
 
-    def take_item(self, user):
+    def give_to(self, user):
         self.status = self.STATUS.taken
         self.in_possession_of = user
 
-    def return_item(self):
+    def return_to_box(self):
         self.status = self.STATUS.contained
         self.in_possession_of = None
