@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Boxes{% endblock %}
+
+{% block content %}
+    {% if box_list %}
+        {% for box in box_list %}
+            <h2>{{ box.name }}</h2>
+        {% endfor %}
+    {% else %}
+        <p>No boxes available.</p>
+    {% endif %}
+{% endblock %}
