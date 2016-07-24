@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Items of box "{{ box.name }}"{% endblock %}
+
+{% block content %}
+    <h2>Items of category "{{ category }}" of box "{{ box.name }}"</h2>
+    {% if item_list %}
+        <ul>
+        {% for item in item_list %}
+            <li>{{ item }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>This box currently contains no items of category {{ category }}.</p>
+    {% endif %}
+{% endblock %}
+

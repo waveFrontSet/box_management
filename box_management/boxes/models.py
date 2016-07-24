@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext as _
+from django.core.urlresolvers import reverse
 
 from box_management.users.models import User
 
@@ -13,6 +14,9 @@ class Box(TimeStampedModel):
 
     def __str__(self):
         return "'{b.name}', located in '{b.location}'".format(b=self)
+
+    def get_absolute_url(self):
+        return reverse('boxes:items_by_box', kwargs={'box': self.name})
 
 
 class ItemCategory(TimeStampedModel):
@@ -41,7 +45,9 @@ class Item(TimeStampedModel):
     def give_to(self, user):
         self.status = self.STATUS.taken
         self.in_possession_of = user
+        self.save()
 
     def return_to_box(self):
         self.status = self.STATUS.contained
         self.in_possession_of = None
+        self.save()

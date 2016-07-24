@@ -4,7 +4,7 @@
 {% block content %}
     {% if box_list %}
         {% for box in box_list %}
-            <h2>{{ box.name }}</h2>
+            <h2><a href="{% url 'boxes:items_by_box' box.name %}">{{ box.name }}</a></h2>
         {% endfor %}
     {% else %}
         <p>No boxes available.</p>
