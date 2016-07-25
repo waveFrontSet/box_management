@@ -74,4 +74,3 @@ class BoxItemReturnView(LoginRequiredMixin, RedirectView):
         item = get_object_or_404(Item, pk=kwargs['pk'])
         item.return_to_box()
         return reverse('boxes:item_return_list', kwargs={'box': kwargs['box']})
-
